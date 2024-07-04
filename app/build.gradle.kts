@@ -94,7 +94,7 @@ dependencies {
     implementation(libs.androidx.room.ktx)
 
     implementation(libs.hilt.android)
-    kapt(libs.hilt.compiler)
+    annotationProcessor(libs.hilt.android.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
 
 }
