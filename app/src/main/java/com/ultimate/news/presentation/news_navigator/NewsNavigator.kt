@@ -30,6 +30,8 @@ import com.ultimate.news.presentation.navgraph.NavGraph
 import com.ultimate.news.presentation.navgraph.Route
 import com.ultimate.news.presentation.news_navigator.components.BottomNavigationItem
 import com.ultimate.news.presentation.news_navigator.components.NewsBottomNavigation
+import com.ultimate.news.presentation.search.SearchScreen
+import com.ultimate.news.presentation.search.SearchViewModel
 
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -94,6 +96,10 @@ fun NewsNavigator() {
                     navigate = { navigateToTab(navController = navController, route = it) })
             }
             composable(route = Route.SearchScreen.route) {
+                val viewModel: SearchViewModel = hiltViewModel()
+                val state = viewModel.state.value
+                OnBackClickStateSaver(navController = navController)
+                SearchScreen(state = state, event = viewModel::onEvent)
             }
             composable(route = Route.DetailsScreen.route) {
 
@@ -104,7 +110,15 @@ fun NewsNavigator() {
         }
     }
 }
-
+@Composable
+fun OnBackClickStateSaver(navController: NavController) {
+    BackHandler(true) {
+        navigateToTab(
+            navController = navController,
+            route = Route.HomeScreen.route
+        )
+    }
+}
 private fun navigateToTab(navController: NavController, route: String) {
     navController.navigate(route) {
         navController.graph.startDestinationRoute?.let { screen_route ->
