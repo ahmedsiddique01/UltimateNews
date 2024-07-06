@@ -13,9 +13,13 @@ import com.ultimate.news.domain.repository.NewsRepository
 import com.ultimate.news.domain.usecases.app_entry.AppEntryUseCases
 import com.ultimate.news.domain.usecases.app_entry.ReadAppEntry
 import com.ultimate.news.domain.usecases.app_entry.SaveAppEntry
+import com.ultimate.news.domain.usecases.news.DeleteArticle
+import com.ultimate.news.domain.usecases.news.GetArticle
+import com.ultimate.news.domain.usecases.news.GetArticles
 import com.ultimate.news.domain.usecases.news.GetNews
 import com.ultimate.news.domain.usecases.news.NewsUseCases
 import com.ultimate.news.domain.usecases.news.SearchNews
+import com.ultimate.news.domain.usecases.news.UpsertArticle
 import com.ultimate.news.util.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
@@ -41,7 +45,8 @@ object AppModule {
         localUserManger: LocalUserManger
     ): AppEntryUseCases = AppEntryUseCases(
         readAppEntry = ReadAppEntry(localUserManger),
-        saveAppEntry = SaveAppEntry(localUserManger)
+        saveAppEntry = SaveAppEntry(localUserManger),
+
     )
 
 
@@ -68,11 +73,16 @@ object AppModule {
     @Provides
     @Singleton
     fun provideNewsUseCases(
-        newsRepository: NewsRepository
+        newsRepository: NewsRepository,
+        newsDao: NewsDao
     ): NewsUseCases {
         return NewsUseCases(
             getNews = GetNews(newsRepository),
-            searchNews = SearchNews(newsRepository)
+            searchNews = SearchNews(newsRepository),
+            upsertArticle = UpsertArticle(newsDao),
+            deleteArticle = DeleteArticle(newsDao),
+            getArticles = GetArticles(newsDao),
+            getArticle = GetArticle(newsDao)
         )
     }
 

@@ -1,7 +1,10 @@
 package com.ultimate.news.presentation.details
 
-sealed class DetailsEvent {
+import com.ultimate.news.domain.model.Article
 
-    object SaveArticle : DetailsEvent()
+sealed class DetailsEvent {
+    data class UpsertDeleteArticle(val article: Article) : DetailsEvent()
+
+    object RemoveSideEffect : DetailsEvent()
 
 }
