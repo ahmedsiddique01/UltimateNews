@@ -2,6 +2,7 @@ package com.ultimate.news.di
 
 import android.app.Application
 import androidx.room.Room
+import com.ultimate.news.BuildConfig.BASE_URL
 import com.ultimate.news.data.local.NewsDao
 import com.ultimate.news.data.local.NewsDatabase
 import com.ultimate.news.data.local.NewsTypeConvertor
@@ -20,7 +21,6 @@ import com.ultimate.news.domain.usecases.news.GetNews
 import com.ultimate.news.domain.usecases.news.NewsUseCases
 import com.ultimate.news.domain.usecases.news.SearchNews
 import com.ultimate.news.domain.usecases.news.UpsertArticle
-import com.ultimate.news.util.Constants.BASE_URL
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
