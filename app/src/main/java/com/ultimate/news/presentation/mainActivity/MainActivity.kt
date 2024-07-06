@@ -10,7 +10,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.ui.Modifier
 import androidx.core.splashscreen.SplashScreen.Companion.installSplashScreen
 import androidx.core.view.WindowCompat
-import com.loc.newsapp.presentation.navgraph.NavGraph
+import com.ultimate.news.presentation.navgraph.NavGraph
 import com.ultimate.news.ui.theme.UltimateNewsTheme
 import dagger.hilt.android.AndroidEntryPoint
 
